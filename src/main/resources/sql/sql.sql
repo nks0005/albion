@@ -1,14 +1,14 @@
 CREATE
-DATABASE test_schema;
+    DATABASE test_schema;
 use
-test_schema;
+    test_schema;
 
 CREATE TABLE admin_info
 (
     id         INT AUTO_INCREMENT,
-    username   VARCHAR(50)  NOT NULL,
-    password   VARCHAR(255) NOT NULL, /* 비밀번호를 암호화하여 저장 */
-    role       ENUM('admin', 'client') NOT NULL,
+    username   VARCHAR(50)              NOT NULL,
+    password   VARCHAR(255)             NOT NULL, /* 비밀번호를 암호화하여 저장 */
+    role       ENUM ('admin', 'client') NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     deleted_at TIMESTAMP,
@@ -19,29 +19,57 @@ CREATE TABLE admin_info
 CREATE TABLE battlelog_info
 (
     id          INT AUTO_INCREMENT,
-    battle_id   INT UNIQUE NOT NULL,
-    match_type  ENUM('22', '55', '1010') NOT NULL,
-    battle_time TIMESTAMP  NOT NULL,
+    battle_id   INT UNIQUE                NOT NULL,
+    match_type  ENUM ('22', '55', '1010') NOT NULL,
+    battle_time TIMESTAMP                 NOT NULL,
     created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     deleted_at  TIMESTAMP,
     PRIMARY KEY (id)
 );
 
+CREATE TABLE match_info
+(
+    id        INT AUTO_INCREMENT,
+    battle_id INT NOT NULL,
+
+    user_name VARCHAR(100) NOT NULL,
+
+    weapon_id INT NOT NULL,
+
+    match_state ENUM('win', 'loss') NOT NULL,
+
+    created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    deleted_at  TIMESTAMP,
+
+    PRIMARY KEY (id),
+    FOREIGN KEY (battle_id) REFERENCES battlelog_info (battle_id),
+    FOREIGN KEY (weapon_id) REFERENCES weapon_id (id)
+);
+
+CREATE TABLE weapon_id(
+    id INT AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+
+    PRIMARY KEY (id)
+);
+
+
 CREATE TABLE user_match_info
 (
-    id         INT AUTO_INCREMENT,
-    battle_id  INT          NOT NULL,
+    id          INT AUTO_INCREMENT,
+    battle_id   INT                  NOT NULL,
 
-    user_uid   VARCHAR(100) NOT NULL,
+    user_uid    VARCHAR(100)         NOT NULL,
 
-    gearset_id INT          NOT NULL,
+    gearset_id  INT                  NOT NULL,
 
-    match      ENUM('win', 'loss') NOT NULL,
+    match_state ENUM ('win', 'loss') NOT NULL,
 
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    deleted_at TIMESTAMP,
+    created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    deleted_at  TIMESTAMP,
 
     PRIMARY KEY (id),
     FOREIGN KEY (battle_id) REFERENCES battlelog_info (battle_id),
@@ -51,14 +79,11 @@ CREATE TABLE user_match_info
 
 CREATE TABLE user_info
 (
-    id    INT AUTO_INCREMENT,
+    id   INT AUTO_INCREMENT,
 
-    uid   VARCHAR(100) UNIQUE NOT NULL,
+    uid  VARCHAR(100) UNIQUE NOT NULL UNIQUE,
 
-    name  VARCHAR(255) UNIQUE NOT NULL,
-
-    guild VARCHAR(255),
-    ally  VARCHAR(255),
+    name VARCHAR(255) UNIQUE NOT NULL,
 
 
     PRIMARY KEY (id)
@@ -81,14 +106,14 @@ CREATE TABLE gearset_info
     FOREIGN KEY (head_id) REFERENCES gear_info (id),
     FOREIGN KEY (armor_id) REFERENCES gear_info (id),
     FOREIGN KEY (shoes_id) REFERENCES gear_info (id),
-    FOREIGN KEY (cape_id) REFERENCES gear_info (id),
+    FOREIGN KEY (cape_id) REFERENCES gear_info (id)
 );
 
 CREATE TABLE gear_info
 (
     id   INT AUTO_INCREMENT,
 
-    name VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL UNIQUE,
 
     PRIMARY KEY (id)
 );

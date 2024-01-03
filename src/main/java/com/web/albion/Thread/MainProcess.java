@@ -50,45 +50,11 @@ public class MainProcess {
             System.out.println("========================");
 
 
+            battleservice.insertBattle(battle);
 
-            try {
-                Battles battles = getBattles(battle);
-
-                battleservice.insertBattle(battles);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
 
         }
-
-
-
     }
 
-    private static Battles getBattles(Battle battle) throws ParseException {
-        Battles battles = new Battles();
-        battles.setBattle_id(battle.getBattle_id());
 
-        String match_type = null;
-        switch(battle.getMatch_type()){
-            case 2:
-                match_type="22";
-                break;
-            case 5:
-                match_type="55";
-                break;
-            case 10:
-                match_type="1010";
-                break;
-        }
-        battles.setMatch_type(match_type);
-
-        String battle_time = battle.getBattle_time();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-        Date parsedDate = format.parse(battle_time);
-        Timestamp timestamp = new Timestamp(parsedDate.getTime());
-
-        battles.setBattle_time(timestamp);
-        return battles;
-    }
 }
