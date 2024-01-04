@@ -17,4 +17,11 @@
     </select>
 
 
+    <select id="getBattles" resultType="com.web.albion.dto.BattlesDto" parameterType="int">
+        SELECT *
+        FROM battlelog_info
+        ORDER BY battle_time DESC
+        LIMIT 10 OFFSET #{offset}
+    </select>
+
 </mapper>

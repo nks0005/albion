@@ -29,24 +29,29 @@ public class MainProcess {
 
     }
 
-    public void run() {
-        List<Battle> battlelogs = battlelog.getBattleIds(0);
+    private void cycle(int index) {
+        List<Battle> battlelogs = battlelog.getBattleIds(index);
 
         for (Battle battle : battlelogs) {
-            System.out.println("========================");
-            System.out.println(battle.getBattle_id());
-            System.out.println(battle.getMatch_type());
-            System.out.println(battle.getBattle_time());
-            System.out.println("| Winners");
-            System.out.println(battle.getWinners().toString());
-            System.out.println("| Lossers");
-            System.out.println(battle.getLossers().toString());
-            System.out.println("========================");
+            //System.out.println("========================");
+            //System.out.println(battle.getBattle_id());
+            //System.out.println(battle.getMatch_type());
+            //System.out.println(battle.getBattle_time());
+            //System.out.println("| Winners");
+            //System.out.println(battle.getWinners().toString());
+            //System.out.println("| Lossers");
+            //System.out.println(battle.getLossers().toString());
+            //System.out.println("========================");
 
 
             battleservice.insertBattle(battle);
+        }
+    }
 
-
+    public void run() {
+        for (int i = 0; i < 10; i++) {
+            int index = i == 0 ? 0 : i * 50;
+            this.cycle(index);
         }
     }
 

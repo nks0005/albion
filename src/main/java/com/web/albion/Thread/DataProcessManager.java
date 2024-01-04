@@ -22,7 +22,7 @@ public class DataProcessManager {
     public DataProcessManager() {
         this.isRunning = false;
         this.process_thread = null;
-        this.waittime = 1 * 60 * 1000;
+        this.waittime = 5 * 60 * 1000;
     }
 
     @PreDestroy
@@ -44,7 +44,7 @@ public class DataProcessManager {
             this.process_thread = new Thread(() -> {
                 while (this.isRunning) {
                     try {
-
+                        System.out.println("cycle on");
                         mainprocess.run();
                         Thread.sleep(this.waittime);
 

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.web.albion.Mapper.BattleDetailMapper">
+
+    <select id="getBattleDetailByBattleId" parameterType="int" resultType="com.web.albion.dto.BattleDetailDto">
+        SELECT * FROM battle_details_view WHERE battle_id=#{battle_id}
+    </select>
+
+    <select id="getBattleDetailWinnerByBattleId" parameterType="int" resultType="com.web.albion.dto.BattleDetailDto">
+        SELECT * FROM battle_details_view WHERE battle_id=#{battle_id} AND match_state='win'
+    </select>
+
+    <select id="getBattleDetailLosserByBattleId" parameterType="int" resultType="com.web.albion.dto.BattleDetailDto">
+        SELECT * FROM battle_details_view WHERE battle_id=#{battle_id} AND match_state='loss'
+    </select>
+
+</mapper>
+

@@ -15,6 +15,17 @@ CREATE TABLE admin_info
     PRIMARY KEY (id)
 );
 
+CREATE TABLE connect_log
+(
+    id         INT AUTO_INCREMENT,
+    remote_ip   VARCHAR(50)              NOT NULL,
+    request_uri   VARCHAR(255)             NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    deleted_at TIMESTAMP,
+    PRIMARY KEY (id)
+);
+
 
 CREATE TABLE battlelog_info
 (
@@ -28,22 +39,6 @@ CREATE TABLE battlelog_info
     PRIMARY KEY (id)
 );
 
-
-/**
-  user_match_info 등록 전에
-
-  user_uid 값을 얻어옴
-    < name > 을 통해. 없으면 생성 후 id 반환
-
-  gearset_id 값을 얻어옴.
-    < Gearset 구조체에 넣어서 >
-        gear_id가 없다? 없으면 생성 후 id 반환
-
-
-
-
-
- */
 
 CREATE TABLE user_match_info
 (
@@ -109,3 +104,41 @@ CREATE TABLE gear_info
 
     PRIMARY KEY (id)
 );
+
+
+## 뷰
+CREATE VIEW battle_details_view AS
+SELECT
+    um.battle_id, ui.name AS username, um.ip,
+    CASE
+        WHEN um.match_state = 'win' THEN 'win'
+        ELSE 'loss'
+        END AS match_state,
+    main_hand_gear.name AS main_hand_name,
+    off_hand_gear.name AS off_hand_name,
+    head_gear.name AS head_name,
+    armor_gear.name AS armor_name,
+    shoes_gear.name AS shoes_name,
+    cape_gear.name AS cape_name,
+    battlelog.match_type AS match_type,
+    battlelog.battle_time AS battle_time
+FROM
+    user_match_info um
+        JOIN
+    user_info ui ON um.user_id = ui.id
+        JOIN
+    gearset_info gi ON um.gearset_id = gi.id
+        JOIN
+    gear_info main_hand_gear ON gi.main_hand_id = main_hand_gear.id
+        JOIN
+    gear_info off_hand_gear ON gi.off_hand_id = off_hand_gear.id
+        JOIN
+    gear_info head_gear ON gi.head_id = head_gear.id
+        JOIN
+    gear_info armor_gear ON gi.armor_id = armor_gear.id
+        JOIN
+    gear_info shoes_gear ON gi.shoes_id = shoes_gear.id
+        JOIN
+    gear_info cape_gear ON gi.cape_id = cape_gear.id
+        JOIN
+    battlelog_info battlelog ON um.battle_id = battlelog.battle_id;

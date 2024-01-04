@@ -6,6 +6,7 @@ import com.web.albion.Model.Gear;
 import com.web.albion.Model.Team;
 import com.web.albion.dto.*;
 import org.apache.catalina.User;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionException;
@@ -16,6 +17,7 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class BattleService {
@@ -61,7 +63,7 @@ public class BattleService {
         GearsDto gear = new GearsDto();
         gear.setName(tmp);
         int gear_id = gearsservice.insertGearSet(gear);
-        System.out.println("gear : " + gear_id + " | name : " + tmp);
+        // System.out.println("gear : " + gear_id + " | name : " + tmp);
 
         return gear_id;
     }
@@ -122,7 +124,7 @@ public class BattleService {
         usermatch.setGearset_id(gearset_id);
         usermatch.setBattle_id(battle_id);
 
-        System.out.println(usermatch.toString());
+        //System.out.println(usermatch.toString());
 
         usermatchservice.insertUserMatch(usermatch);
     }
@@ -131,7 +133,7 @@ public class BattleService {
     @Transactional
     public int insertBattle(Battle battle) {
         if (battlemapper.checkBattleExists(battle.getBattle_id()) == 0) {
-            System.out.println("no have : " + battle.getBattle_id());
+            // System.out.println("no have : " + battle.getBattle_id());
 
 
             int result = 0;
@@ -158,7 +160,7 @@ public class BattleService {
 
             return result;
         } else {
-            System.out.println("have : " + battle.getBattle_id());
+           // System.out.println("have : " + battle.getBattle_id());
         }
         return 0;
     }
@@ -192,5 +194,9 @@ public class BattleService {
 
         battles.setBattle_time(timestamp);
         return battles;
+    }
+
+    List<BattlesDto> getBattles(@Param("offset") int offset){
+        return battlemapper.getBattles(offset);
     }
 }
