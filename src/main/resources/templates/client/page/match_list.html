@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Albion Online Hellgate</title>
+    <meta name="description" content="Monitor and track Albion Online's Hellgate content for updates and statistics.">
+    <meta name="keywords" content="Albion Online, Hellgate, monitoring, updates, statistics">
+    <meta name="author" content="">
+    <meta name="robots" content="index, follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: black;
+            line-height: 1.6;
+            color: white;
+        }
+
+        table {
+            width: 85%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid white;
+            text-align: center;
+        }
+
+        th {
+            background-color: #444;
+        }
+
+        .table-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 2px solid white;
+            background-color: transparent;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: white;
+            color: black;
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="table-container">
+    <table>
+        <thead>
+        <tr>
+            <th>Battle ID</th>
+            <th>Match <br>(2v2, 5v5, 10v10)</th>
+            <th>Match Time (UTC)</th>
+            <th>Winners</th>
+            <th>Losers</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="battledetail : ${battlesDetails}">
+            <td th:text="${battledetail.battle.battle_id}"></td>
+            <td>
+                <span th:switch="${battledetail.battle.match_type}">
+                    <span th:case="'22'">2v2</span>
+                    <span th:case="'55'">5v5</span>
+                    <span th:case="'1010'">10v10</span>
+                </span>
+            </td>
+            <td th:text="${#dates.format(battledetail.battle.battle_time, 'yyyy-MM-dd HH:mm')}">
+            </td>
+            <td>
+                <table style="border: none; border-collapse: collapse;">
+                    <tr th:each="winner : ${battledetail.winners_detail}">
+                        <td style="border: none;">
+                            <span th:text="${winner.username}"></span>
+                        </td>
+                        <td style="border: none;">
+                            <span th:text="${winner.ip}"></span>
+                        </td>
+                        <td style="border: none;">
+                            <img alt="mainhand" th:if="${winner.main_hand_name != ''}" th:src="@{'https://render.albiononline.com/v1/item/' + ${winner.main_hand_name} + '?size=64'}">
+                        </td>
+                        <td style="border: none;">
+                            <img alt="off_hand" th:if="${winner.off_hand_name != ''}" th:src="@{'https://render.albiononline.com/v1/item/' + ${winner.off_hand_name} + '?size=64'}">
+                        </td>
+                        <td style="border: none;">
+                            <img alt="head" th:if="${winner.head_name != ''}" th:src="@{'https://render.albiononline.com/v1/item/' + ${winner.head_name} + '?size=64'}">
+                        </td>
+                        <td style="border: none;">
+                            <img alt="armor" th:if="${winner.armor_name != ''}" th:src="@{'https://render.albiononline.com/v1/item/' + ${winner.armor_name} + '?size=64'}">
+                        </td>
+                        <td style="border: none;">
+                            <img alt="shoes" th:if="${winner.shoes_name != ''}" th:src="@{'https://render.albiononline.com/v1/item/' + ${winner.shoes_name} + '?size=64'}">
+                        </td>
+                        <td style="border: none;">
+                            <img alt="cape" th:if="${winner.cape_name != ''}" th:src="@{'https://render.albiononline.com/v1/item/' + ${winner.cape_name} + '?size=64'}">
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <table style="border: none; border-collapse: collapse;">
+                    <tr th:each="losser : ${battledetail.lossers_detail}">
+                        <td style="border: none;">
+                            <span th:text="${losser.username}"></span>
+                        </td>
+                        <td style="border: none;">
+                            <span th:text="${losser.ip}"></span>
+                        </td>
+                        <td style="border: none;">
+                            <img alt="mainhand" th:if="${losser.main_hand_name != ''}" th:src="@{'https://render.albiononline.com/v1/item/' + ${losser.main_hand_name} + '?size=64'}">
+                        </td>
+                        <td style="border: none;">
+                            <img alt="off_hand" th:if="${losser.off_hand_name != ''}" th:src="@{'https://render.albiononline.com/v1/item/' + ${losser.off_hand_name} + '?size=64'}">
+                        </td>
+                        <td style="border: none;">
+                            <img alt="head" th:if="${losser.head_name != ''}" th:src="@{'https://render.albiononline.com/v1/item/' + ${losser.head_name} + '?size=64'}">
+                        </td>
+                        <td style="border: none;">
+                            <img alt="armor" th:if="${losser.armor_name != ''}" th:src="@{'https://render.albiononline.com/v1/item/' + ${losser.armor_name} + '?size=64'}">
+                        </td>
+                        <td style="border: none;">
+                            <img alt="shoes" th:if="${losser.shoes_name != ''}" th:src="@{'https://render.albiononline.com/v1/item/' + ${losser.shoes_name} + '?size=64'}">
+                        </td>
+                        <td style="border: none;">
+                            <img alt="cape" th:if="${losser.cape_name != ''}" th:src="@{'https://render.albiononline.com/v1/item/' + ${losser.cape_name} + '?size=64'}">
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<div style="text-align: center;">
+    <button class="btn" th:if="${previousPageURL != null}"
+            th:attr="data-url=${previousPageURL}">&larr;
+    </button>
+    <button class="btn" th:attr="data-url=${nextPageURL}">&rarr;</button>
+</div>
+
+<script>
+    var buttons = document.querySelectorAll('.btn');
+    buttons.forEach(function (button) {
+        button.addEventListener('click', function () {
+            var url = this.getAttribute('data-url');
+            window.location.href = url;
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -13,4 +13,10 @@ public interface BattleMapper {
     int checkBattleExists(int battle_id);
 
     List<BattlesDto> getBattles(@Param("offset") int offset);
+    //List<BattlesDto> getBattlesType(@Param("offset") int offset, @Param("type") int type);
+
+    List<BattlesDto> getBattlesDuo(@Param("offset") int offset);
+    List<BattlesDto> getBattlesFive(@Param("offset") int offset);
+    List<BattlesDto> getBattlesTen(@Param("offset") int offset);
+
 }

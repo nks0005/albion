@@ -196,7 +196,21 @@ public class BattleService {
         return battles;
     }
 
-    List<BattlesDto> getBattles(@Param("offset") int offset){
+    List<BattlesDto> getRecentBattles(@Param("offset") int offset){
         return battlemapper.getBattles(offset);
     }
+
+
+    List<BattlesDto> getBattlesDuo(@Param("offset") int offset){
+        return battlemapper.getBattlesDuo(offset);
+    }
+
+    List<BattlesDto> getBattlesFive(@Param("offset") int offset){
+        return battlemapper.getBattlesFive(offset);
+    }
+
+    List<BattlesDto> getBattlesTen(@Param("offset") int offset){
+        return battlemapper.getBattlesTen(offset);
+    }
+
 }

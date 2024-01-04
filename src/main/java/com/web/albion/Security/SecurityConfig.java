@@ -54,7 +54,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .requestMatchers("/", LOGIN_PATH).permitAll()
+                .requestMatchers("/", "/match/**", LOGIN_PATH).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .csrf().disable()
@@ -87,13 +87,21 @@ class IPLoggingFilter extends OncePerRequestFilter {
 
         // 여기에서 로깅을 수행하거나 로그에 IP를 추가하는 작업 수행
         // 예를 들어, Logger 사용 시:
-        System.out.println(clientIP);
-        System.out.println(request.getRequestURI().toString());
+        // System.out.println(clientIP);
+        //System.out.println(request.getRequestURL().toString());
+        // System.out.println(request.getQueryString().toString());
+
+        // System.out.println(request.getRequestURI().toString());
 
         ConnectLogDto connectlog = new ConnectLogDto();
 
+
+        String requestURI = request.getRequestURI() + "/?" + request.getQueryString();
+        // System.out.println(requestURI);
+
         connectlog.setRemote_ip(clientIP);
-        connectlog.setRequest_uri(request.getRequestURI().toString());
+        connectlog.setRequest_uri(requestURI);
+
         this.connectlogservice.insertConnectLog(connectlog);
 
         // 다음 필터로 요청 전달

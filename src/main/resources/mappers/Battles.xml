@@ -21,7 +21,31 @@
         SELECT *
         FROM battlelog_info
         ORDER BY battle_time DESC
-        LIMIT 10 OFFSET #{offset}
+        LIMIT 3 OFFSET #{offset}
+    </select>
+
+    <select id="getBattlesDuo" resultType="com.web.albion.dto.BattlesDto" parameterType="int">
+        SELECT *
+        FROM battlelog_info
+        WHERE match_type = '22'
+        ORDER BY battle_time DESC
+        LIMIT 3 OFFSET #{offset}
+    </select>
+
+    <select id="getBattlesFive" resultType="com.web.albion.dto.BattlesDto" parameterType="int">
+        SELECT *
+        FROM battlelog_info
+        WHERE match_type = '55'
+        ORDER BY battle_time DESC
+        LIMIT 3 OFFSET #{offset}
+    </select>
+
+    <select id="getBattlesTen" resultType="com.web.albion.dto.BattlesDto" parameterType="int">
+        SELECT *
+        FROM battlelog_info
+        WHERE match_type = '1010'
+        ORDER BY battle_time DESC
+        LIMIT 3 OFFSET #{offset}
     </select>
 
 </mapper>
