@@ -5,7 +5,7 @@ import org.apache.ibatis.type.Alias;
 
 @Data
 @Alias("gears")
-public class Gears {
+public class GearsDto {
     int id;
     String name;
 }

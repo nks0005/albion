@@ -12,7 +12,7 @@ import java.util.List;
 
 @Data
 @Alias("users")
-public class Users implements UserDetails {
+public class UsersDto implements UserDetails {
 
     private int id;
     private String username;

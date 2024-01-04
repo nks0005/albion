@@ -133,6 +133,7 @@ public class BattleLog {
     private Team getTeam(String name, JsonNode jsonNode) {
         Team team = new Team();
 
+        double userip = 0.0;
         Gear result_gear = new Gear();
 
         for (JsonNode node : jsonNode) {
@@ -140,6 +141,10 @@ public class BattleLog {
             if (node.get("Killer").get("Name").asText().equals(name)) {
                 Gear killer_gear = this.getGear(name, node.get("Killer").get("Equipment"));
                 result_gear = mergeGear(result_gear, killer_gear);
+
+                double ip = node.get("Killer").get("AverageItemPower").asDouble();
+                if(ip != 0.0)
+                    userip = ip;
             }
             // Victim
             if (node.get("Victim").get("Name").asText().equals(name)) {
@@ -149,6 +154,10 @@ public class BattleLog {
 
                 Gear victim_gear = this.getGear(name, node.get("Victim").get("Equipment"));
                 result_gear = mergeGear(result_gear, victim_gear);
+
+                double ip = node.get("Victim").get("AverageItemPower").asDouble();
+                if(ip != 0.0)
+                    userip = ip;
             }
 
             // GroupMembers
@@ -160,6 +169,11 @@ public class BattleLog {
 
                     Gear group_gear = this.getGear(name, group.get("Equipment"));
                     result_gear = mergeGear(result_gear, group_gear);
+
+
+                    double ip = group.get("AverageItemPower").asDouble();
+                    if(ip != 0.0)
+                        userip = ip;
                 }
             }
 
@@ -169,12 +183,17 @@ public class BattleLog {
                 if (part.get("Name").asText().equals(name)) {
                     Gear part_gear = this.getGear(name, part.get("Equipment"));
                     result_gear = mergeGear(result_gear, part_gear);
+
+                    double ip = part.get("AverageItemPower").asDouble();
+                    if(ip != 0.0)
+                        userip = ip;
                 }
             }
         }
 
         //System.out.println("name : " + name + " / gear set : " + result_gear.toString());
         team.setGear(result_gear);
+        team.setIp(userip);
 
         return team;
     }

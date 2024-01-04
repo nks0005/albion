@@ -3,12 +3,12 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.web.albion.Mapper.GearsSetMapper">
 
-    <insert id="insertGearset" parameterType="com.web.albion.dto.GearsSet">
+    <insert id="insertGearset" parameterType="com.web.albion.dto.GearsSetDto">
         INSERT INTO gearset_info(main_hand_id, off_hand_id, head_id, armor_id, shoes_id, cape_id)
-        VALUES (#{main_hand_id}, #{off_hand_id},${head_id},${armor_id}, ${shoes_id}, ${cape_id})
+        VALUES (#{main_hand_id}, #{off_hand_id},#{head_id},#{armor_id}, #{shoes_id}, #{cape_id})
     </insert>
 
-    <select id="selectGearsetByGear" parameterType="com.web.albion.dto.GearsSet" resultType="java.lang.Integer">
+    <select id="selectGearsetByGear" parameterType="com.web.albion.dto.GearsSetDto" resultType="java.lang.Integer">
         SELECT id FROM gearset_info WHERE main_hand_id=#{main_hand_id} AND off_hand_id=#{off_hand_id} AND head_id = #{head_id} AND armor_id = #{armor_id} AND shoes_id = #{shoes_id} AND cape_id = #{cape_id}
     </select>
 

@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 
 @Data
 @Alias("battles")
-public class Battles {
+public class BattlesDto {
     private int id;
     private int battle_id;
     private String match_type;

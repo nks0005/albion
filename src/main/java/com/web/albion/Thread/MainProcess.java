@@ -1,17 +1,11 @@
 package com.web.albion.Thread;
 
 
-import com.web.albion.Mapper.BattleMapper;
 import com.web.albion.Model.Battle;
 import com.web.albion.Service.BattleService;
-import com.web.albion.dto.Battles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 

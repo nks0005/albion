@@ -1,7 +1,7 @@
 package com.web.albion.Service;
 
 import com.web.albion.Mapper.GearsMapper;
-import com.web.albion.dto.Gears;
+import com.web.albion.dto.GearsDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ public class GearsService {
     @Autowired
     GearsMapper gearsmapper;
 
-    public int insertGearSet(Gears gear){
+    public int insertGearSet(GearsDto gear){
         //System.out.println("gear name : " + gear.getName());
 
         Integer gearid = gearsmapper.selectGearByName(gear.getName());

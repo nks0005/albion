@@ -28,40 +28,31 @@ CREATE TABLE battlelog_info
     PRIMARY KEY (id)
 );
 
-CREATE TABLE match_info
-(
-    id        INT AUTO_INCREMENT,
-    battle_id INT NOT NULL,
 
-    user_name VARCHAR(100) NOT NULL,
+/**
+  user_match_info 등록 전에
 
-    weapon_id INT NOT NULL,
+  user_uid 값을 얻어옴
+    < name > 을 통해. 없으면 생성 후 id 반환
 
-    match_state ENUM('win', 'loss') NOT NULL,
+  gearset_id 값을 얻어옴.
+    < Gearset 구조체에 넣어서 >
+        gear_id가 없다? 없으면 생성 후 id 반환
 
-    created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    deleted_at  TIMESTAMP,
 
-    PRIMARY KEY (id),
-    FOREIGN KEY (battle_id) REFERENCES battlelog_info (battle_id),
-    FOREIGN KEY (weapon_id) REFERENCES weapon_id (id)
-);
 
-CREATE TABLE weapon_id(
-    id INT AUTO_INCREMENT,
-    name VARCHAR(100) NOT NULL,
 
-    PRIMARY KEY (id)
-);
 
+ */
 
 CREATE TABLE user_match_info
 (
     id          INT AUTO_INCREMENT,
     battle_id   INT                  NOT NULL,
 
-    user_uid    VARCHAR(100)         NOT NULL,
+    ip INT DEFAULT 0,
+
+    user_id    int         NOT NULL,
 
     gearset_id  INT                  NOT NULL,
 
@@ -74,8 +65,9 @@ CREATE TABLE user_match_info
     PRIMARY KEY (id),
     FOREIGN KEY (battle_id) REFERENCES battlelog_info (battle_id),
     FOREIGN KEY (gearset_id) REFERENCES gearset_info (id),
-    FOREIGN KEY (user_uid) REFERENCES user_info (uid)
+    FOREIGN KEY (user_id) REFERENCES user_info (id)
 );
+
 
 CREATE TABLE user_info
 (

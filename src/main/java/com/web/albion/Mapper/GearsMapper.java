@@ -1,11 +1,11 @@
 package com.web.albion.Mapper;
 
-import com.web.albion.dto.Gears;
+import com.web.albion.dto.GearsDto;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface GearsMapper {
-    int insertGear(Gears gears);
+    int insertGear(GearsDto gearsDto);
 
     Integer selectGearByName(String name);
 

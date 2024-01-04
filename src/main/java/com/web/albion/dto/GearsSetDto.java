@@ -5,7 +5,7 @@ import org.apache.ibatis.type.Alias;
 
 @Data
 @Alias("gearsset")
-public class GearsSet {
+public class GearsSetDto {
     int id;
 
     int main_hand_id;
