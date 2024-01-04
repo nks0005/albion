@@ -55,9 +55,9 @@ public class SecurityConfig {
         http
                 .authorizeRequests()
                 .requestMatchers("/", "/match/**", LOGIN_PATH).permitAll()
-                .requestMatchers("/admin/board/start", "/admin/board","/admin/board/stop").authenticated()
+                .requestMatchers("/admin/**").authenticated()
                 .and()
-                //.csrf().disable()
+                .csrf().disable()
                 .formLogin(form -> form
                         .loginPage(LOGIN_PATH)
                         .usernameParameter(USERNAME_PARAMETER)
