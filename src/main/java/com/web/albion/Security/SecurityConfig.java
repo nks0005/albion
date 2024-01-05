@@ -54,8 +54,8 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .requestMatchers("/", "/match/**", LOGIN_PATH).permitAll()
-                .anyRequest().authenticated()
+                    .requestMatchers("/", "/match/**", "/detail/**", LOGIN_PATH).permitAll()
+                .requestMatchers("/admin/**").authenticated()
                 .and()
                 .csrf().disable()
                 .formLogin(form -> form
@@ -66,6 +66,7 @@ public class SecurityConfig {
                         .failureHandler(fHandler))
                 .authenticationProvider(provider)
                 .addFilterBefore(new IPLoggingFilter(connectlogservice), UsernamePasswordAuthenticationFilter.class);
+
 
         return http.build();
     }
@@ -94,7 +95,6 @@ class IPLoggingFilter extends OncePerRequestFilter {
         // System.out.println(request.getRequestURI().toString());
 
         ConnectLogDto connectlog = new ConnectLogDto();
-
 
         String requestURI = request.getRequestURI() + "/?" + request.getQueryString();
         // System.out.println(requestURI);

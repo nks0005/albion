@@ -19,4 +19,6 @@ public interface BattleMapper {
     List<BattlesDto> getBattlesFive(@Param("offset") int offset);
     List<BattlesDto> getBattlesTen(@Param("offset") int offset);
 
+    BattlesDto getBattleByBattleId(@Param("battle_id") int battle_id);
+
 }

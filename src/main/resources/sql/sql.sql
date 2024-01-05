@@ -142,3 +142,4 @@ FROM
     gear_info cape_gear ON gi.cape_id = cape_gear.id
         JOIN
     battlelog_info battlelog ON um.battle_id = battlelog.battle_id;
+

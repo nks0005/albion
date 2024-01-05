@@ -149,11 +149,14 @@
 
 
 <div style="text-align: center;">
-    <button class="btn" th:if="${previousPageURL != null}"
-            th:attr="data-url=${previousPageURL}">&larr;
-    </button>
+    <button class="btn" th:if="${previousPageURL != null}" th:attr="data-url=${previousPageURL}">&larr;</button>
     <button class="btn" th:attr="data-url=${nextPageURL}">&rarr;</button>
+    <div>
+        <button class="btn" th:attr="data-url='/'">home</button>
+    </div>
 </div>
+
+
 
 <script>
     var buttons = document.querySelectorAll('.btn');

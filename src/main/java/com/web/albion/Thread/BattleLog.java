@@ -402,7 +402,7 @@ public class BattleLog {
                 Winner_Team = A_team;
                 Losser_Team = B_team;
             } else {
-                throw new Exception("DRAW??");
+                continue;
             }
 
             //System.out.println("Winner Team : " + Winner_Team.toString());
