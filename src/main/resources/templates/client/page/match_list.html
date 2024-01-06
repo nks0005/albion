@@ -19,7 +19,6 @@
         }
 
         table {
-            width: 85%;
             border-collapse: collapse;
         }
 
@@ -33,8 +32,13 @@
         }
 
         .table-container {
-            display: flex;
+
             justify-content: center;
+            align-items:center;
+
+            width: 100%;
+
+            overflow-x: auto; /* 테이블 넘치는 경우 스크롤 표시 */
         }
 
         .btn {
