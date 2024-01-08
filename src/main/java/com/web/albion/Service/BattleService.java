@@ -213,4 +213,8 @@ public class BattleService {
         return battlemapper.getBattlesTen(offset);
     }
 
+    BattlesDto getBattleByBattleId(@Param("battleid") int battleid){
+        return battlemapper.getBattleByBattleId(battleid);
+    }
+
 }

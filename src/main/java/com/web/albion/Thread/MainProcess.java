@@ -49,7 +49,7 @@ public class MainProcess {
     }
 
     public void run() {
-        for (int i = 0; i < 11; i++) {
+        for (int i = 0; i < 199; i++) {
             int index = i == 0 ? 0 : i * 50;
             //System.out.println("cycle : "+ i);
             this.cycle(index);

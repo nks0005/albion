@@ -16,6 +16,9 @@
         SELECT COUNT(*) FROM battlelog_info WHERE battle_id = #{battle_id}
     </select>
 
+    <select id="getBattleByBattleId" parameterType="int" resultType="com.web.albion.dto.BattlesDto">
+        SELECT * FROM battlelog_info WHERE battle_id = #{battle_id}
+    </select>
 
     <select id="getBattles" resultType="com.web.albion.dto.BattlesDto" parameterType="int">
         SELECT *

@@ -15,5 +15,7 @@
         SELECT * FROM battle_details_view WHERE battle_id=#{battle_id} AND match_state='loss'
     </select>
 
+
+
 </mapper>
 
