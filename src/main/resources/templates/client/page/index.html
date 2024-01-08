@@ -51,6 +51,83 @@
         <a href="/match/five" class="btn">5v5 Match</a>
         <a href="/match/ten" class="btn">10v10 Match</a>
     </div>
+
+
+    <h2>Search User Name</h2>
+    <div class="button-container">
+        <form id="searchForm" action="/search/User" method="post">
+            <label for="user_name">user name : </label>
+            <input type="text" id="user_name" name="user_name" placeholder="user name"> <input type="submit"
+                                                                                               value="Search">
+        </form>
+    </div>
+
+    <div style="text-align: center;">
+        <div id="search_result" style="display: inline-block;">
+            <!-- 표가 여기에 나타날 것입니다 -->
+        </div>
+    </div>
 </div>
+
 </body>
+
+<script>
+    document.getElementById('searchForm').addEventListener('submit', function (event) {
+        event.preventDefault(); // 폼 제출 방지
+        const userName = document.getElementById('user_name').value; // 사용자명 값 가져오기
+
+        fetch('/search/User', {
+            method: 'POST',
+            body: JSON.stringify({user_name: userName}),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => response.json())
+            .then(data => {
+                console.log(data);
+
+                const searchResultElement = document.getElementById('search_result');
+
+                if (data) {
+                    const resultHTML =
+                        `<h2>Search : ${data.user_name}</h2>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Match Type</th>
+                                    <th>Win</th>
+                                    <th>Lose</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>2v2</td>
+                                    <td>${data.duo.win}</td>
+                                    <td>${data.duo.lose}</td>
+                                </tr>
+                                <tr>
+                                    <td>5v5</td>
+                                    <td>${data.five.win}</td>
+                                    <td>${data.five.lose}</td>
+                                </tr>
+                                <tr>
+                                    <td>10v10</td>
+                                    <td>${data.ten.win}</td>
+                                    <td>${data.ten.lose}</td>
+                                </tr>
+                            </tbody>
+                        </table>`;
+
+                    // 결과를 요소에 추가
+                    searchResultElement.innerHTML = resultHTML;
+                } else {
+                    // 데이터가 없을 경우 예외 처리
+                    searchResultElement.innerHTML = '<p>No result found</p>';
+                }
+            }).catch(error => {
+            console.error("Error : ", error);
+        });
+    });
+</script>
+
 </html>

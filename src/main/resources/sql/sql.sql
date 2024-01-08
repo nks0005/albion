@@ -143,3 +143,22 @@ FROM
         JOIN
     battlelog_info battlelog ON um.battle_id = battlelog.battle_id;
 
+
+
+CREATE VIEW user_win_loss_count_per_match_type AS
+SELECT
+    u.id AS user_id,
+    u.name AS user_name,
+    b.match_type,
+    COUNT(CASE WHEN umi.match_state = 'win' THEN 1 END) AS win_count,
+    COUNT(CASE WHEN umi.match_state = 'loss' THEN 1 END) AS loss_count
+FROM
+    user_info u
+        JOIN
+    user_match_info umi ON u.id = umi.user_id
+        JOIN
+    battlelog_info b ON umi.battle_id = b.battle_id
+GROUP BY
+    u.id, u.name, b.match_type;
+
+
