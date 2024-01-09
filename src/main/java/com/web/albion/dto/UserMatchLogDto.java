@@ -10,5 +10,5 @@ public class UserMatchLogDto {
     String name;
     String match_state;
     String match_type;
-
+    String battle_time;
 }

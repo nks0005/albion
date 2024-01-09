@@ -4,7 +4,7 @@
 <mapper namespace="com.web.albion.Mapper.UserMatchLogMapper">
 
     <select id="getUserMatchLogs" parameterType="String" resultType="com.web.albion.dto.UserMatchLogDto">
-        SELECT bi.battle_id, ui.name, umi.match_state, bi.match_type
+        SELECT bi.battle_id, ui.name, umi.match_state, bi.match_type, bi.battle_time
         FROM battlelog_info bi
                  JOIN user_match_info umi ON bi.battle_id = umi.battle_id
                  JOIN user_info ui ON ui.id = umi.user_id

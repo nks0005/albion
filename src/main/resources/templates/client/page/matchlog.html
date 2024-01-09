@@ -10,6 +10,18 @@
             color: white;
         }
 
+        .link {
+            color: greenyellow; /* 텍스트 색상을 파란색으로 변경 */
+            font-family: 'Arial', sans-serif; /* 글꼴을 Arial 또는 sans-serif로 설정 */
+            font-size: 16px; /* 글꼴 크기를 16px로 설정 */
+            /* 원하는 다른 스타일 속성들도 추가 가능 */
+        }
+
+        .link:hover {
+            color: goldenrod;
+        }
+
+
         table {
             width: 80%;
             margin: 20px auto;
@@ -52,11 +64,16 @@
         <td>
             ( 2v2, 5v5, 10v10 )
         </td>
+        <td>
+            battle time (UTC)
+        </td>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="log:${userwinlose.DuoUserMatchLog}">
-        <td th:text="${log.battle_id}"></td>
+    <tr th:each="log: ${matchLogs}">
+        <td>
+            <a th:href="@{/detail/{battleId}(battleId=${log.battle_id})}" class="link" th:text="${log.battle_id}" target="_blank">btn</a>
+        </td>
         <td th:text="${log.match_state}"></td>
         <td>
                 <span th:switch="${log.match_type}">
@@ -65,30 +82,8 @@
                     <span th:case="'1010'">10v10</span>
                 </span>
         </td>
+        <td th:text="${log.battle_time}"></td>
     </tr>
-    <tr th:each="log:${userwinlose.FiveUserMatchLog}">
-        <td th:text="${log.battle_id}"></td>
-        <td th:text="${log.match_state}"></td>
-        <td>
-                <span th:switch="${log.match_type}">
-                    <span th:case="'22'">2v2</span>
-                    <span th:case="'55'">5v5</span>
-                    <span th:case="'1010'">10v10</span>
-                </span>
-        </td>
-    </tr>
-    <tr th:each="log:${userwinlose.TenUserMatchLog}">
-        <td th:text="${log.battle_id}"></td>
-        <td th:text="${log.match_state}"></td>
-        <td>
-                <span th:switch="${log.match_type}">
-                    <span th:case="'22'">2v2</span>
-                    <span th:case="'55'">5v5</span>
-                    <span th:case="'1010'">10v10</span>
-                </span>
-        </td>
-    </tr>
-
     </tbody>
 </table>
 
@@ -106,6 +101,11 @@
             window.location.href = url;
         });
     });
+
+    function openNewTab() {
+        var url = '/';
+        window.open(url, '_blank'); // '_blank'는 새 창으로 열리도록 지정
+    }
 </script>
 
 </html>

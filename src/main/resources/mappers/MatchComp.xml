@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.web.albion.Mapper.MatchCompMapper">
+
+    <insert id="insertDuoComp" parameterType="com.web.albion.dto.DuoCompDto">
+        INSERT INTO DuoComps (A_main_hand_id, B_main_hand_id, win, lose)
+        VALUES (#{A_main_hand_id}, #{B_main_hand_id},#{win},#{lose})
+    </insert>
+
+    <update id="updateDuoComp" parameterType="com.web.albion.dto.DuoCompDto">
+        UPDATE DuoComps SET win=#{win}, lose=#{lose}
+                        WHERE A_main_hand_id=#{A_main_hand_id} AND B_main_hand_id=#{B_main_hand_id}
+    </update>
+
+    <select id="selectDuoComp" parameterType="com.web.albion.dto.DuoCompDto" resultType="com.web.albion.dto.DuoCompDto">
+        SELECT * FROM DuoComps
+        WHERE A_main_hand_id=#{A_main_hand_id} AND B_main_hand_id=#{B_main_hand_id}
+    </select>
+
+
+
+
+
+</mapper>

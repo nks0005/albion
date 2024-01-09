@@ -38,6 +38,7 @@ CREATE TABLE battlelog_info
     deleted_at  TIMESTAMP,
     PRIMARY KEY (id)
 );
+alter table battlelog_info add column process INT DEFAULT 0;
 
 
 CREATE TABLE user_match_info
@@ -162,3 +163,55 @@ GROUP BY
     u.id, u.name, b.match_type;
 
 
+# 2v2, 5v5, 10v10 별도 테이블 구성
+CREATE TABLE DuoComps (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+
+    A_main_hand_id INT NOT NULL,
+    B_main_hand_id INT NOT NULL,
+
+    win INT NOT NULL,
+    lose INT NOT NULL,
+
+
+    FOREIGN KEY (A_main_hand_id) REFERENCES gear_info (id),
+    FOREIGN KEY (B_main_hand_id) REFERENCES gear_info (id)
+);
+
+CREATE TABLE FiveComps (
+                          id INT AUTO_INCREMENT PRIMARY KEY,
+
+                          A_main_hand_id INT NOT NULL,
+                          B_main_hand_id INT NOT NULL,
+                          C_main_hand_id INT NOT NULL,
+                          D_main_hand_id INT NOT NULL,
+                          E_main_hand_id INT NOT NULL,
+
+                          win INT NOT NULL,
+                          lose INT NOT NULL,
+
+
+                          FOREIGN KEY (A_main_hand_id) REFERENCES gear_info (id),
+                          FOREIGN KEY (B_main_hand_id) REFERENCES gear_info (id)
+);
+CREATE TABLE TenComps (
+                          id INT AUTO_INCREMENT PRIMARY KEY,
+
+                          A_main_hand_id INT NOT NULL,
+                          B_main_hand_id INT NOT NULL,
+                          C_main_hand_id INT NOT NULL,
+                          D_main_hand_id INT NOT NULL,
+                          E_main_hand_id INT NOT NULL,
+                          F_main_hand_id INT NOT NULL,
+                          G_main_hand_id INT NOT NULL,
+                          H_main_hand_id INT NOT NULL,
+                          I_main_hand_id INT NOT NULL,
+                          J_main_hand_id INT NOT NULL,
+
+                          win INT NOT NULL,
+                          lose INT NOT NULL,
+
+
+                          FOREIGN KEY (A_main_hand_id) REFERENCES gear_info (id),
+                          FOREIGN KEY (B_main_hand_id) REFERENCES gear_info (id)
+);

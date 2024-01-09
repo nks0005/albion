@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.web.albion.Mapper.BattleMatchGearLogMapper">
+
+    <select id="getBattleMatchGearLogs" parameterType="int" resultType="com.web.albion.Model.BattleMatchGearLog">
+        SELECT bi.battle_id,
+               bi.match_type,
+               umi.match_state,
+               bi.battle_time,
+               main_hand_gi.name AS main_hand,
+               off_hand_gi.name  AS off_hand,
+               head_gi.name      AS head,
+               armor_gi.name     AS armor,
+               shoes_gi.name     AS shoes,
+               cape_gi.name      AS cape
+        FROM battlelog_info bi
+                 JOIN user_match_info umi ON umi.battle_id = bi.battle_id
+                 JOIN gearset_info gsi ON umi.gearset_id = gsi.id
+                 JOIN gear_info main_hand_gi ON gsi.main_hand_id = main_hand_gi.id
+                 JOIN gear_info off_hand_gi ON gsi.off_hand_id = off_hand_gi.id
+                 JOIN gear_info head_gi ON gsi.head_id = head_gi.id
+                 JOIN gear_info armor_gi ON gsi.armor_id = armor_gi.id
+                 JOIN gear_info shoes_gi ON gsi.shoes_id = shoes_gi.id
+                 JOIN gear_info cape_gi ON gsi.cape_id = cape_gi.id
+        WHERE bi.battle_id = #{battle_id}
+    </select>
+
+
+</mapper>
+
