@@ -27,6 +27,48 @@
     <button type="submit">Stop Process</button>
 </form>
 
+<div id="systemInfo">
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    // 시스템 정보를 가져오고 업데이트하는 함수
+    function updateSystemInfo() {
+        // CPU 정보를 가져오기 위한 axios 호출
+        axios.get('/systeminfo/cpu')
+            .then(response => {
+                const cpuInfo = response.data; // CPU 정보 가져오기
+                // 메모리 정보를 가져오기 위한 axios 호출
+                axios.get('/systeminfo/memory')
+                    .then(response => {
+                        const memoryInfo = response.data; // 메모리 정보 가져오기
+                        // div 요소를 선택합니다.
+                        const systemInfoDiv = document.getElementById('systemInfo');
+
+                        // 기존의 내용을 비웁니다.
+                        systemInfoDiv.innerHTML = '';
+
+                        // CPU 정보를 div에 추가합니다.
+                        systemInfoDiv.innerHTML += `<p>${cpuInfo}</p>`;
+
+                        // 메모리 정보를 div에 추가합니다.
+                        systemInfoDiv.innerHTML += `<p>${memoryInfo}</p>`;
+                    })
+                    .catch(error => {
+                        console.error('Error fetching memory info', error);
+                    });
+            })
+            .catch(error => {
+                console.error('Error fetching CPU info', error);
+            });
+    }
+
+    // 페이지가 로드되면 처음 한 번은 실행합니다.
+    updateSystemInfo();
+
+    // 1초마다 updateSystemInfo 함수를 호출하여 화면을 갱신합니다.
+    setInterval(updateSystemInfo, 1000);
+</script>
 
 <!-- 다른 내용들 -->
 </body>

@@ -215,3 +215,45 @@ CREATE TABLE TenComps (
                           FOREIGN KEY (A_main_hand_id) REFERENCES gear_info (id),
                           FOREIGN KEY (B_main_hand_id) REFERENCES gear_info (id)
 );
+
+
+-- DuoComps에 대한 뷰
+CREATE VIEW DuoCompSummary AS
+SELECT dc.id, dc.win, dc.lose, (dc.win + dc.lose) AS total_matches,
+       A_main_hand_gi.name AS A_main_hand, B_main_hand_gi.name AS B_main_hand
+FROM DuoComps dc
+         JOIN gear_info A_main_hand_gi ON dc.A_main_hand_id = A_main_hand_gi.id
+         JOIN gear_info B_main_hand_gi ON dc.B_main_hand_id = B_main_hand_gi.id;
+
+-- FiveComps에 대한 뷰
+CREATE VIEW FiveCompSummary AS
+SELECT fc.id, fc.win, fc.lose, (fc.win + fc.lose) AS total_matches,
+       A_main_hand_gi.name AS A_main_hand, B_main_hand_gi.name AS B_main_hand,
+       C_main_hand_gi.name AS C_main_hand, D_main_hand_gi.name AS D_main_hand,
+       E_main_hand_gi.name AS E_main_hand
+FROM FiveComps fc
+         JOIN gear_info A_main_hand_gi ON fc.A_main_hand_id = A_main_hand_gi.id
+         JOIN gear_info B_main_hand_gi ON fc.B_main_hand_id = B_main_hand_gi.id
+         JOIN gear_info C_main_hand_gi ON fc.C_main_hand_id = C_main_hand_gi.id
+         JOIN gear_info D_main_hand_gi ON fc.D_main_hand_id = D_main_hand_gi.id
+         JOIN gear_info E_main_hand_gi ON fc.E_main_hand_id = E_main_hand_gi.id;
+
+-- TenComps에 대한 뷰
+CREATE VIEW TenCompSummary AS
+SELECT tc.id, tc.win, tc.lose, (tc.win + tc.lose) AS total_matches,
+       A_main_hand_gi.name AS A_main_hand, B_main_hand_gi.name AS B_main_hand,
+       C_main_hand_gi.name AS C_main_hand, D_main_hand_gi.name AS D_main_hand,
+       E_main_hand_gi.name AS E_main_hand, F_main_hand_gi.name AS F_main_hand,
+       G_main_hand_gi.name AS G_main_hand, H_main_hand_gi.name AS H_main_hand,
+       I_main_hand_gi.name AS I_main_hand, J_main_hand_gi.name AS J_main_hand
+FROM TenComps tc
+         JOIN gear_info A_main_hand_gi ON tc.A_main_hand_id = A_main_hand_gi.id
+         JOIN gear_info B_main_hand_gi ON tc.B_main_hand_id = B_main_hand_gi.id
+         JOIN gear_info C_main_hand_gi ON tc.C_main_hand_id = C_main_hand_gi.id
+         JOIN gear_info D_main_hand_gi ON tc.D_main_hand_id = D_main_hand_gi.id
+         JOIN gear_info E_main_hand_gi ON tc.E_main_hand_id = E_main_hand_gi.id
+         JOIN gear_info F_main_hand_gi ON tc.F_main_hand_id = F_main_hand_gi.id
+         JOIN gear_info G_main_hand_gi ON tc.G_main_hand_id = G_main_hand_gi.id
+         JOIN gear_info H_main_hand_gi ON tc.H_main_hand_id = H_main_hand_gi.id
+         JOIN gear_info I_main_hand_gi ON tc.I_main_hand_id = I_main_hand_gi.id
+         JOIN gear_info J_main_hand_gi ON tc.J_main_hand_id = J_main_hand_gi.id;

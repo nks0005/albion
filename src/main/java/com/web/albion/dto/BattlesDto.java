@@ -12,4 +12,5 @@ public class BattlesDto {
     private int battle_id;
     private String match_type;
     private Timestamp battle_time;
+    private int process;
 }

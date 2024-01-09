@@ -9,4 +9,5 @@ public interface GearsMapper {
 
     Integer selectGearByName(String name);
 
+
 }

@@ -34,18 +34,8 @@ public class SearchController {
         return userwinlose;
     }
 
-    @Autowired
-    MatchCompService matchCompService;
-
-    @GetMapping("/Test")
-    public String getTest(){
-        matchCompService.test();
-        return "";
-    }
-
     @GetMapping("/User/MatchLog/{user_name}")
     public ModelAndView getUserDetail(@PathVariable("user_name") String user_name, ModelAndView mv) {
-        matchCompService.test();
 
         UserWinLose userwinlose = userwinlosepermatchserivce.getUserWinLoseByUsername(user_name);
         if(userwinlose == null) {

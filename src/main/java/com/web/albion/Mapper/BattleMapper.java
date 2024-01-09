@@ -10,6 +10,8 @@ import java.util.List;
 public interface BattleMapper {
     int insertBattle(BattlesDto battle);
 
+    List<BattlesDto> getBattlesInProcessZero();
+
     int checkBattleExists(int battle_id);
 
     List<BattlesDto> getBattles(@Param("offset") int offset);
@@ -20,5 +22,7 @@ public interface BattleMapper {
     List<BattlesDto> getBattlesTen(@Param("offset") int offset);
 
     BattlesDto getBattleByBattleId(@Param("battle_id") int battle_id);
+
+    void updateProcessDone(int battle_id);
 
 }

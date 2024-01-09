@@ -3,23 +3,96 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.web.albion.Mapper.MatchCompMapper">
 
+    <!-- Duo -->
     <insert id="insertDuoComp" parameterType="com.web.albion.dto.DuoCompDto">
         INSERT INTO DuoComps (A_main_hand_id, B_main_hand_id, win, lose)
-        VALUES (#{A_main_hand_id}, #{B_main_hand_id},#{win},#{lose})
+        VALUES (#{A_main_hand_id}, #{B_main_hand_id}, #{win}, #{lose})
     </insert>
 
     <update id="updateDuoComp" parameterType="com.web.albion.dto.DuoCompDto">
-        UPDATE DuoComps SET win=#{win}, lose=#{lose}
-                        WHERE A_main_hand_id=#{A_main_hand_id} AND B_main_hand_id=#{B_main_hand_id}
+        UPDATE DuoComps
+        SET win=#{win},
+            lose=#{lose}
+        WHERE A_main_hand_id = #{A_main_hand_id}
+          AND B_main_hand_id = #{B_main_hand_id}
     </update>
 
     <select id="selectDuoComp" parameterType="com.web.albion.dto.DuoCompDto" resultType="com.web.albion.dto.DuoCompDto">
-        SELECT * FROM DuoComps
-        WHERE A_main_hand_id=#{A_main_hand_id} AND B_main_hand_id=#{B_main_hand_id}
+        SELECT *
+        FROM DuoComps
+        WHERE A_main_hand_id = #{A_main_hand_id}
+          AND B_main_hand_id = #{B_main_hand_id}
     </select>
 
+    <!-- Five -->
+    <insert id="insertFiveComp" parameterType="com.web.albion.dto.FiveCompDto">
+        INSERT INTO FiveComps
+            (A_main_hand_id, B_main_hand_id, C_main_hand_id, D_main_hand_id, E_main_hand_id, win, lose)
+        VALUES (#{A_main_hand_id}, #{B_main_hand_id}, #{C_main_hand_id}, #{D_main_hand_id}, #{E_main_hand_id}, #{win}, #{lose})
+    </insert>
 
+    <update id="updateFiveComp" parameterType="com.web.albion.dto.FiveCompDto">
+        UPDATE FiveComps
+        SET win=#{win},
+            lose=#{lose}
+        WHERE A_main_hand_id = #{A_main_hand_id}
+          AND B_main_hand_id = #{B_main_hand_id}
+          AND C_main_hand_id = #{C_main_hand_id}
+          AND D_main_hand_id = #{D_main_hand_id}
+          AND E_main_hand_id = #{E_main_hand_id}
+    </update>
 
+    <select id="selectFiveComp" parameterType="com.web.albion.dto.FiveCompDto" resultType="com.web.albion.dto.FiveCompDto">
+        SELECT *
+        FROM FiveComps
+        WHERE A_main_hand_id = #{A_main_hand_id}
+          AND B_main_hand_id = #{B_main_hand_id}
+          AND C_main_hand_id = #{C_main_hand_id}
+          AND D_main_hand_id = #{D_main_hand_id}
+          AND E_main_hand_id = #{E_main_hand_id}
+    </select>
+
+    <!-- Ten -->
+    <insert id="insertTenComp" parameterType="com.web.albion.dto.TenCompDto">
+        INSERT INTO TenComps
+            (A_main_hand_id, B_main_hand_id, C_main_hand_id, D_main_hand_id, E_main_hand_id,
+             F_main_hand_id, G_main_hand_id, H_main_hand_id, I_main_hand_id, J_main_hand_id,
+             win, lose)
+        VALUES (#{A_main_hand_id}, #{B_main_hand_id}, #{C_main_hand_id}, #{D_main_hand_id}, #{E_main_hand_id},
+                #{F_main_hand_id}, #{G_main_hand_id}, #{H_main_hand_id}, #{I_main_hand_id}, #{J_main_hand_id},
+                #{win}, #{lose})
+    </insert>
+
+    <update id="updateTenComp" parameterType="com.web.albion.dto.TenCompDto">
+        UPDATE TenComps
+        SET win=#{win},
+            lose=#{lose}
+        WHERE A_main_hand_id = #{A_main_hand_id}
+          AND B_main_hand_id = #{B_main_hand_id}
+          AND C_main_hand_id = #{C_main_hand_id}
+          AND D_main_hand_id = #{D_main_hand_id}
+          AND E_main_hand_id = #{E_main_hand_id}
+          AND F_main_hand_id = #{F_main_hand_id}
+          AND G_main_hand_id = #{G_main_hand_id}
+          AND H_main_hand_id = #{H_main_hand_id}
+          AND I_main_hand_id = #{I_main_hand_id}
+          AND J_main_hand_id = #{J_main_hand_id}
+    </update>
+
+    <select id="selectTenComp" parameterType="com.web.albion.dto.TenCompDto" resultType="com.web.albion.dto.TenCompDto">
+        SELECT *
+        FROM TenComps
+        WHERE A_main_hand_id = #{A_main_hand_id}
+          AND B_main_hand_id = #{B_main_hand_id}
+          AND C_main_hand_id = #{C_main_hand_id}
+          AND D_main_hand_id = #{D_main_hand_id}
+          AND E_main_hand_id = #{E_main_hand_id}
+          AND F_main_hand_id = #{F_main_hand_id}
+          AND G_main_hand_id = #{G_main_hand_id}
+          AND H_main_hand_id = #{H_main_hand_id}
+          AND I_main_hand_id = #{I_main_hand_id}
+          AND J_main_hand_id = #{J_main_hand_id}
+    </select>
 
 
 </mapper>

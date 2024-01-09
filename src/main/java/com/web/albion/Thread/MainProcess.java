@@ -3,6 +3,7 @@ package com.web.albion.Thread;
 
 import com.web.albion.Model.Battle;
 import com.web.albion.Service.BattleService;
+import com.web.albion.Service.MatchCompService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -25,6 +26,9 @@ public class MainProcess {
     @Autowired
     private BattleService battleservice;
 
+    @Autowired
+    private MatchCompService matchcompService;
+
     public MainProcess() {
 
     }
@@ -43,15 +47,18 @@ public class MainProcess {
             //System.out.println(battle.getLossers().toString());
             //System.out.println("========================");
 
-
             battleservice.insertBattle(battle);
         }
     }
 
     public void run() {
-        for (int i = 0; i < 199; i++) {
+
+        System.out.println("meta update");
+        this.matchcompService.updateMeta();
+
+        for (int i = 0; i < 30; i++) {
             int index = i == 0 ? 0 : i * 50;
-            //System.out.println("cycle : "+ i);
+            System.out.println("cycle : "+ i);
             this.cycle(index);
         }
     }

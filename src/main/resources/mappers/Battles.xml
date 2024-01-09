@@ -27,6 +27,21 @@
         LIMIT 3 OFFSET #{offset}
     </select>
 
+    <select id="getBattlesInProcessZero" resultType="com.web.albion.dto.BattlesDto">
+        SELECT *
+        FROM battlelog_info
+        WHERE process=0
+        ORDER BY id DESC
+        LIMIT 200
+    </select>
+
+    <update id="updateProcessDone" parameterType="int">
+        UPDATE battlelog_info
+            SET process=1
+            WHERE battle_id=#{battle_id}
+    </update>
+
+
     <select id="getBattlesDuo" resultType="com.web.albion.dto.BattlesDto" parameterType="int">
         SELECT *
         FROM battlelog_info

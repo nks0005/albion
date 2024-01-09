@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Meta Index</title>
+
+
+    <meta name="description" content="Monitor and track Albion Online's Hellgate content for updates and statistics.">
+    <meta name="keywords" content="Albion Online, Hellgate, monitoring, updates, statistics">
+    <meta name="author" content="">
+    <meta name="robots" content="index, follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <style>
+        h1, h2, h3 {
+            color: white; /* 흰색으로 글자색 변경 */
+            text-align: center; /* 가운데 정렬 */
+            margin-top: 50px; /* 위쪽 여백 추가 */
+        }
+
+        tr, th {
+            color: white; /* 흰색으로 글자색 변경 */
+            text-align: center; /* 가운데 정렬 */
+        }
+
+        body {
+            background-color: black; /* 배경색을 검은색으로 설정 */
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            margin: 0 10px;
+            text-decoration: none;
+            color: white;
+            background-color: darkblue;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: deepskyblue;
+        }
+    </style>
+</head>
+
+
+<body>
+
+<table>
+    <thead>
+    <tr>
+        <th>
+            Comps
+        </th>
+        <th>
+            win
+        </th>
+        <th>
+            lose
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="comp:${comps}">
+
+        <td>
+            <img alt="Amainhand" th:if="${comp.A_main_hand != null}" th:src="@{'https://render.albiononline.com/v1/item/T8_' + ${comp.A_main_hand} + '?size=64'}">
+            <img alt="Bmainhand" th:if="${comp.B_main_hand != null}" th:src="@{'https://render.albiononline.com/v1/item/T8_' + ${comp.B_main_hand} + '?size=64'}">
+            <img alt="Cmainhand" th:if="${comp.C_main_hand != null}" th:src="@{'https://render.albiononline.com/v1/item/T8_' + ${comp.C_main_hand} + '?size=64'}">
+            <img alt="Dmainhand" th:if="${comp.D_main_hand != null}" th:src="@{'https://render.albiononline.com/v1/item/T8_' + ${comp.D_main_hand} + '?size=64'}">
+            <img alt="Emainhand" th:if="${comp.E_main_hand != null}" th:src="@{'https://render.albiononline.com/v1/item/T8_' + ${comp.E_main_hand} + '?size=64'}">
+            <img alt="Fmainhand" th:if="${comp.F_main_hand != null}" th:src="@{'https://render.albiononline.com/v1/item/T8_' + ${comp.F_main_hand} + '?size=64'}">
+            <img alt="Gmainhand" th:if="${comp.G_main_hand != null}" th:src="@{'https://render.albiononline.com/v1/item/T8_' + ${comp.G_main_hand} + '?size=64'}">
+            <img alt="Hmainhand" th:if="${comp.H_main_hand != null}" th:src="@{'https://render.albiononline.com/v1/item/T8_' + ${comp.H_main_hand} + '?size=64'}">
+            <img alt="Imainhand" th:if="${comp.I_main_hand != null}" th:src="@{'https://render.albiononline.com/v1/item/T8_' + ${comp.I_main_hand} + '?size=64'}">
+            <img alt="Jmainhand" th:if="${comp.J_main_hand != null}" th:src="@{'https://render.albiononline.com/v1/item/T8_' + ${comp.J_main_hand} + '?size=64'}">
+
+
+        </td>
+        <td th:text="${comp.win}">
+
+        </td>
+        <td th:text="${comp.lose}">
+
+        </td>
+    </tr>
+    </tbody>
+
+</table>
+
+
+</body>
+</html>

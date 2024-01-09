@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.web.albion.Mapper.MetaCompSummaryMapper">
+
+    <select id="getDuoComp" parameterType="int" resultType="com.web.albion.dto.MetaCompSummaryDto">
+        SELECT *
+        FROM DuoCompSummary
+        ORDER BY total_matches DESC
+        limit 10 offset #{offset}
+    </select>
+
+    <select id="getFiveComp" parameterType="int" resultType="com.web.albion.dto.MetaCompSummaryDto">
+        SELECT *
+        FROM FiveCompSummary
+        ORDER BY total_matches DESC
+        limit 10 offset #{offset}
+    </select>
+
+    <select id="getTenComp" parameterType="int" resultType="com.web.albion.dto.MetaCompSummaryDto">
+        SELECT *
+        FROM TenCompSummary
+        ORDER BY total_matches DESC
+        limit 10 offset #{offset}
+    </select>
+
+</mapper>

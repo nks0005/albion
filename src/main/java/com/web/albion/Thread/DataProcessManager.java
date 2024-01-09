@@ -56,6 +56,8 @@ public class DataProcessManager {
             });
 
             this.process_thread.start();
+
+
         }
     }
 

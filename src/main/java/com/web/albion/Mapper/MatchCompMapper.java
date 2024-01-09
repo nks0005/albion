@@ -14,10 +14,18 @@ public interface MatchCompMapper {
     public DuoCompDto selectDuoComp(DuoCompDto duocompdto);
 
 
+    public int insertFiveComp(FiveCompDto compdto);
+    public int updateFiveComp(FiveCompDto compdto);
+    public FiveCompDto selectFiveComp(FiveCompDto compdto);
 
-    public int insertFiveComp(FiveCompDto fivecompdto);
 
-    public int insertTenComp(TenCompDto tencompdto);
+    public int insertTenComp(TenCompDto compdto);
+    public int updateTenComp(TenCompDto compdto);
+    public TenCompDto selectTenComp(TenCompDto compdto);
+
+
+
+    // Get Meta
 
 
 }
