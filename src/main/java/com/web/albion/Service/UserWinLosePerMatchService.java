@@ -32,13 +32,13 @@ public class UserWinLosePerMatchService {
         {
             switch(userwinlose.getMatch_type()){
                 case "22":
-                    result_userwinlose.setWinLose(result_userwinlose.getDuo(), userwinlose.getWin_count(), userwinlose.getLose_count());
+                    result_userwinlose.setWinLose(result_userwinlose.getDuo(), userwinlose.getWin_count(), userwinlose.getLoss_count());
                     break;
                 case "55":
-                    result_userwinlose.setWinLose(result_userwinlose.getFive(), userwinlose.getWin_count(), userwinlose.getLose_count());
+                    result_userwinlose.setWinLose(result_userwinlose.getFive(), userwinlose.getWin_count(), userwinlose.getLoss_count());
                     break;
                 case "1010":
-                    result_userwinlose.setWinLose(result_userwinlose.getTen(), userwinlose.getWin_count(), userwinlose.getLose_count());
+                    result_userwinlose.setWinLose(result_userwinlose.getTen(), userwinlose.getWin_count(), userwinlose.getLoss_count());
                     break;
             }
         }

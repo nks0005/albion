@@ -8,5 +8,5 @@ public class UserWinLosePerMatchDto {
     String user_name;
     String match_type;
     int win_count;
-    int lose_count;
+    int loss_count;
 }
