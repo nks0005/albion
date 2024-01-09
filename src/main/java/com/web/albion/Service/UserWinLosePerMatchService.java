@@ -1,7 +1,9 @@
 package com.web.albion.Service;
 
+import com.web.albion.Mapper.UserMatchLogMapper;
 import com.web.albion.Mapper.UserWinLosePerMatchMapper;
 import com.web.albion.Model.UserWinLose;
+import com.web.albion.dto.UserMatchLogDto;
 import com.web.albion.dto.UserWinLosePerMatchDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,9 @@ import java.util.List;
 public class UserWinLosePerMatchService {
     @Autowired
     UserWinLosePerMatchMapper userwinlosepermatchmapper;
+
+    @Autowired
+    UserMatchLogMapper usermatchlogmapper;
 
     public UserWinLose getUserWinLoseByUsername(String user_name){
         System.out.println("User name : " + user_name);
@@ -37,6 +42,17 @@ public class UserWinLosePerMatchService {
                     break;
             }
         }
+
+        // get UserMatchLog
+        List<UserMatchLogDto> usermatchlogs = usermatchlogmapper.getUserMatchLogs(result_userwinlose.getUser_name());
+        for(UserMatchLogDto usermatchlog : usermatchlogs){
+            switch(usermatchlog.getMatch_type()){
+                case "22" -> result_userwinlose.getDuoUserMatchLog().add(usermatchlog);
+                case "55" -> result_userwinlose.getFiveUserMatchLog().add(usermatchlog);
+                case "1010" -> result_userwinlose.getTenUserMatchLog().add(usermatchlog);
+            }
+        }
+
 
         return result_userwinlose;
     }

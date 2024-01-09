@@ -9,5 +9,4 @@ import java.util.List;
 public interface UserWinLosePerMatchMapper {
 
     List<UserWinLosePerMatchDto> getUserWinLose(String user_name);
-
 }

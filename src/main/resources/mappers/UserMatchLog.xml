@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.web.albion.Mapper.UserMatchLogMapper">
+
+    <select id="getUserMatchLogs" parameterType="String" resultType="com.web.albion.dto.UserMatchLogDto">
+        SELECT bi.battle_id, ui.name, umi.match_state, bi.match_type
+        FROM battlelog_info bi
+                 JOIN user_match_info umi ON bi.battle_id = umi.battle_id
+                 JOIN user_info ui ON ui.id = umi.user_id
+        WHERE ui.name = #{user_name}
+    </select>
+
+</mapper>

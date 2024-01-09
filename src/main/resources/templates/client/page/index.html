@@ -89,7 +89,7 @@
                 const searchResultElement = document.getElementById('search_result');
 
                 if (data) {
-                    const resultHTML =
+                    let resultHTML =
                         `<h2>Search : ${data.user_name}</h2>
                         <table>
                             <thead>
@@ -117,6 +117,8 @@
                                 </tr>
                             </tbody>
                         </table>`;
+
+                    resultHTML += `<a href="/search/User/MatchLog/${data.user_name}" class="btn">detail</a>`
 
                     // 결과를 요소에 추가
                     searchResultElement.innerHTML = resultHTML;

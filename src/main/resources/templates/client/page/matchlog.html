@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MatchLog</title>
+
+    <style>
+        body {
+            background-color: black;
+            color: white;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #111; /* 검은색 배경 */
+            color: white;
+        }
+
+        th, td {
+            border: 1px solid white; /* 테두리 색상 */
+            padding: 8px;
+            text-align: center;
+        }
+
+        thead {
+            background-color: #333; /* 헤더 배경색 */
+        }
+
+        tr:nth-child(even) {
+            background-color: #222; /* 짝수 행 배경색 */
+        }
+
+        tr:nth-child(odd) {
+            background-color: #111; /* 홀수 행 배경색 */
+        }
+    </style>
+
+</head>
+<body>
+
+<table>
+    <thead>
+    <tr>
+        <td>
+            battle_id
+        </td>
+        <td>
+            (win / loss)
+        </td>
+        <td>
+            ( 2v2, 5v5, 10v10 )
+        </td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="log:${userwinlose.DuoUserMatchLog}">
+        <td th:text="${log.battle_id}"></td>
+        <td th:text="${log.match_state}"></td>
+        <td>
+                <span th:switch="${log.match_type}">
+                    <span th:case="'22'">2v2</span>
+                    <span th:case="'55'">5v5</span>
+                    <span th:case="'1010'">10v10</span>
+                </span>
+        </td>
+    </tr>
+    <tr th:each="log:${userwinlose.FiveUserMatchLog}">
+        <td th:text="${log.battle_id}"></td>
+        <td th:text="${log.match_state}"></td>
+        <td>
+                <span th:switch="${log.match_type}">
+                    <span th:case="'22'">2v2</span>
+                    <span th:case="'55'">5v5</span>
+                    <span th:case="'1010'">10v10</span>
+                </span>
+        </td>
+    </tr>
+    <tr th:each="log:${userwinlose.TenUserMatchLog}">
+        <td th:text="${log.battle_id}"></td>
+        <td th:text="${log.match_state}"></td>
+        <td>
+                <span th:switch="${log.match_type}">
+                    <span th:case="'22'">2v2</span>
+                    <span th:case="'55'">5v5</span>
+                    <span th:case="'1010'">10v10</span>
+                </span>
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+
+<div style="text-align: center;">
+    <div>
+        <button class="btn" th:attr="data-url='/'">home</button>
+    </div>
+</div>
+</body>
+<script>
+    var buttons = document.querySelectorAll('.btn');
+    buttons.forEach(function (button) {
+        button.addEventListener('click', function () {
+            var url = this.getAttribute('data-url');
+            window.location.href = url;
+        });
+    });
+</script>
+
+</html>
